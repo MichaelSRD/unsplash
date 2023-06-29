@@ -1,0 +1,47 @@
+<header>
+    <div class="derecha">
+        <div class="logo">
+            <img src="../../assets/img/my_unsplash_logo.svg" alt="Logo">
+          </div>
+          <div class="search">
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Ingrese una etiqueta" (input)="search()">
+          </div>
+    </div>
+    <div (click)="openModal()" class="add-button">
+      <button>Add a photo</button>
+    </div>
+    
+  </header>
+  <div class="modal" *ngIf="modalOpen">
+    
+    <form *ngIf="!estado" class="modal-content" (submit)="submitForm($event)">
+      <h2>Add a new photo</h2>
+      <label for="tagsInput">Label:</label>
+      <input type="text" id="tagsInput" name="tagsInput" placeholder="agrega etiquetas separadas por coma" [(ngModel)]="tags" required>
+
+      <label for="imageInput">Photo:</label>
+      <div class="newPhoto">
+        <p *ngIf="nombreimg == '' ">Seleccionar una foto</p>
+        <p *ngIf="nombreimg">{{nombreimg}}</p>
+        <input type="file" id="imageInput" (change)="onFileChange($event)" accept="image/*" required>
+      </div>
+      
+
+      <div class="actions">
+        <button (click)="closeModal()">Cancelar</button>
+        <button type="submit" >Submit</button>
+      </div>
+      
+    </form>
+    <form *ngIf="estado" class="modal-content" (submit)="submitDelete($event)">
+      <h2>Are you sure?</h2>
+      <label for="tagsInput">Password:</label>
+      <input type="password" id="tagsInput" name="tagsInput" placeholder="" [(ngModel)]="pass" required>      
+
+      <div class="actions">
+        <button (click)="closeModal()">Cancelar</button>
+        <button type="submit"  [ngStyle]="estado ? {'background': 'red'} : {'': ''}" >Delete</button>
+      </div>
+      
+    </form>
+  </div>

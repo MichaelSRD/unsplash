@@ -1,0 +1,29 @@
+<main>
+    <div class="photo-gallery">
+      <div class="photo" [ngStyle]="{'display': datosRecibidos.length === 0 ? 'block' : 'none'}" *ngFor="let photo of photos">
+        <img [src]="photo.url" [alt]="photo.tags" [style.height]="photo.height">
+        <div class="hover">
+           <div class="tags">
+              <p>{{photo.tags}}</p>
+           </div>
+           <div class="delete">
+            <button (click)="eliminar(photo.nombre)" >delete</button>
+           </div>
+        </div>
+      </div>
+
+      <div class="photo"  [ngStyle]="{'display': datosRecibidos.length > 0 ? 'block' : 'none'}" *ngFor="let photo of datosRecibidos">
+        <img [src]="photo.url" [alt]="photo.tags" [style.height]="photo.height">
+        <div class="hover">
+           <div class="tags">
+              <p>{{photo.tags}}</p>
+           </div>
+           <div class="delete">
+            <button (click)="eliminar(photo.nombre)" >delete</button>
+           </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </main>
